@@ -28,7 +28,7 @@ export class ItemDetailComponent  implements OnInit {
   private firestore = inject(Firestore);
 
   item$!: Observable<Item>;
-  itemId!: string;
+  //itemId!: string;
   isFavorito = false;
   user: User | null = null;
 
