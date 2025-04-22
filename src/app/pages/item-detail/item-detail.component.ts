@@ -8,6 +8,7 @@ import {UserAuthService} from '../../services/user-auth.service';
 import {ItemListService} from '../../services/item-list.service';
 import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
+import {doc, Firestore, onSnapshot} from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-item-detail',
@@ -24,7 +25,7 @@ export class ItemDetailComponent  implements OnInit {
   private favoritosService = inject(ItemFavoritesService);
   private authService = inject(UserAuthService);
   private itemListService = inject(ItemListService);
-
+  private firestore = inject(Firestore);
 
   item$!: Observable<Item>;
   itemId!: string;
@@ -41,6 +42,7 @@ export class ItemDetailComponent  implements OnInit {
   */
 
 
+  /*
   ngOnInit() {
     this.itemId = this.route.snapshot.paramMap.get('id')!;
     this.item$ = this.itemListService.getItemById(this.itemId);
@@ -56,6 +58,30 @@ export class ItemDetailComponent  implements OnInit {
       }
     });
   }
+  */
+
+  ngOnInit() {
+
+    this.route.paramMap.subscribe(async params => {
+      const id = params.get('id');
+      if (!id) return;
+
+      this.item$ = this.itemListService.getItemById(id);
+
+      this.authService.currentUser$.subscribe(user => {
+        this.user = user;
+        if (user) {
+          const favDocRef =
+            doc(this.firestore, `users/${user.uid}/favoritos/${id}`);
+
+          // Escucha en tiempo real si este item está en favoritos
+          onSnapshot(favDocRef, docSnap => {
+            this.isFavorito = docSnap.exists();
+          });
+        }
+      });
+    });
+  }
 
   async toggleFavorito(item: Item) {
     if (!this.user) return;
@@ -67,7 +93,7 @@ export class ItemDetailComponent  implements OnInit {
       await this.favoritosService.addFavorito(item);
     }
 
-    this.isFavorito = !this.isFavorito;
+    // this.isFavorito = !this.isFavorito;
   }
 
 }
