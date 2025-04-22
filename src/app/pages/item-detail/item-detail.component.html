@@ -1,7 +1,10 @@
 <div class="p-4" *ngIf="item$ | async as item">
   <div class="bg-white rounded-lg shadow-md overflow-hidden">
-    <img [src]="item.imagenUrl" alt="Imagen" class="w-full h-64 object-cover" />
+
+    <img [src]="item.imagenUrl" alt="Imagen" class="w-full max-h-[450px]  object-cover" />
+
     <div class="p-4">
+
       <h2 class="text-2xl font-bold">{{ item.nombre }}</h2>
       <p class="text-sm text-gray-500 mb-2">{{ item.tipo | titlecase }}</p>
       <p class="mb-4">{{ item.descripcion }}</p>
