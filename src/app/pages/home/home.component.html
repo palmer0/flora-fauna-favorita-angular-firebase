@@ -1,0 +1,23 @@
+<div class="p-4">
+  <h2 class="text-2xl font-bold mb-4">Home</h2>
+  <div class="grid gap-4">
+    <div
+      class="flex items-center bg-white rounded-lg shadow-md p-4 cursor-pointer hover:bg-gray-100"
+      *ngFor="let item of items$ | async"
+      (click)="openDetail(item.id!)"
+    >
+      <img
+        [src]="item.imagenUrl"
+        alt="{{ item.nombre }}"
+        class="w-16 h-16 object-cover rounded-md mr-4"
+      />
+      <div class="flex-1">
+        <div class="font-semibold">{{ item.nombre }}</div>
+        <div class="text-sm text-gray-500">{{ item.tipo | titlecase }}</div>
+      </div>
+      <div class="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">
+        {{ item.vecesElegido }} votos
+      </div>
+    </div>
+  </div>
+</div>

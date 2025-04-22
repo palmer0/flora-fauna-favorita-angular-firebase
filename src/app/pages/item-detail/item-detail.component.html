@@ -1,0 +1,21 @@
+<div class="p-4" *ngIf="item$ | async as item">
+  <div class="bg-white rounded-lg shadow-md overflow-hidden">
+    <img [src]="item.imagenUrl" alt="Imagen" class="w-full h-64 object-cover" />
+    <div class="p-4">
+      <h2 class="text-2xl font-bold">{{ item.nombre }}</h2>
+      <p class="text-sm text-gray-500 mb-2">{{ item.tipo | titlecase }}</p>
+      <p class="mb-4">{{ item.descripcion }}</p>
+      <span class="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
+        {{ item.vecesElegido }} votos
+      </span>
+    </div>
+  </div>
+
+  <button
+    *ngIf="user"
+    (click)="toggleFavorito(item)"
+    class="mt-4 w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-md"
+  >
+    {{ isFavorito ? 'Quitar de favoritos' : 'Añadir a favoritos' }}
+  </button>
+</div>

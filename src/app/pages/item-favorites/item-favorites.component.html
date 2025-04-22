@@ -1,0 +1,20 @@
+<div class="p-4">
+  <h2 class="text-2xl font-bold mb-4">Favoritos</h2>
+  <div class="grid gap-4">
+    <div
+      class="flex items-center bg-white rounded-lg shadow-md p-4 cursor-pointer hover:bg-gray-100"
+      *ngFor="let fav of favoritos$ | async"
+      (click)="openDetail(fav.id)"
+    >
+      <img
+        [src]="fav.imagenUrl"
+        alt="{{ fav.nombre }}"
+        class="w-16 h-16 object-cover rounded-md mr-4"
+      />
+      <div>
+        <div class="font-semibold">{{ fav.nombre }}</div>
+        <div class="text-sm text-gray-500">{{ fav.tipo | titlecase }}</div>
+      </div>
+    </div>
+  </div>
+</div>
