@@ -1,5 +1,5 @@
-import {Component, inject, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Component, inject, OnDestroy, OnInit} from '@angular/core';
+import {Observable, Subscription} from 'rxjs';
 import {Item} from '../../models/item.model';
 import {ItemListService} from '../../services/item-list.service';
 import {ActivatedRoute, Router, RouterModule} from '@angular/router';
@@ -16,7 +16,7 @@ import {CommonModule} from '@angular/common';
   templateUrl: './item-list.component.html',
   styleUrl: './item-list.component.css'
 })
-export class ItemListComponent implements OnInit {
+export class ItemListComponent implements OnDestroy {
 
   private itemListService = inject(ItemListService);
   private route = inject(ActivatedRoute);
@@ -24,6 +24,15 @@ export class ItemListComponent implements OnInit {
 
   tipo: 'animal' | 'planta' = 'animal';
   items$!: Observable<Item[]>;
+  private sub: Subscription;
+
+  constructor() {
+    this.sub = this.route.paramMap.subscribe((params) => {
+      // this.tipo = params.get('tipo')  || '';
+      this.tipo = params.get('tipo') as 'animal' | 'planta';
+      this.items$ = this.itemListService.getItemsByTipo(this.tipo);
+    });
+  }
 
   /*
   constructor(
@@ -33,10 +42,12 @@ export class ItemListComponent implements OnInit {
   ) {}
   */
 
+  /*
   ngOnInit() {
     this.tipo = this.route.snapshot.paramMap.get('tipo') as 'animal' | 'planta';
     this.items$ = this.itemListService.getItemsByTipo(this.tipo);
   }
+  */
 
 
   openDetail(itemId: string) {
@@ -49,9 +60,23 @@ export class ItemListComponent implements OnInit {
     });
   }
 
+  /*
   addNewItem() {
     //this.router.navigate(['/item-form', { tipo: this.tipo }]);
     this.router.navigate(['/item-form', this.tipo]);
   }
+  */
 
+
+  getTitulo(): string {
+
+    const tipoCapitalizado =
+      this.tipo === 'animal' ? 'Animales' : 'Plantas';
+    return `Lista de ${tipoCapitalizado}`;
+  }
+
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

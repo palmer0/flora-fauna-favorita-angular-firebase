@@ -18,11 +18,17 @@ export class AppComponent {
   private router = inject(Router);
   private userAuthService = inject(UserAuthService);
 
-  user = this.userAuthService.currentUser$;
+  //user = this.userAuthService.currentUser$;
   currentRoute: string = '';
   //menuOpen = true;
+  user: any = null;
 
   constructor() {
+    this.userAuthService.currentUser$.subscribe((user) => {
+      this.user = user;
+    });
+
+
     this.router.events.subscribe(() => {
       this.currentRoute = this.router.url;
     });

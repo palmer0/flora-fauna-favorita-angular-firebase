@@ -8,9 +8,34 @@
       <span class="inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
         {{ item.vecesElegido }} votos
       </span>
+
+
+      <!-- Switch para favorito -->
+      <div *ngIf="user" class="mt-6 flex justify-end items-center gap-2">
+        <span class="text-gray-700 text-sm font-medium">Favorito</span>
+
+        <label class="relative inline-flex items-center cursor-pointer">
+          <input
+            type="checkbox"
+            class="sr-only peer"
+            [checked]="isFavorito"
+            (change)="toggleFavorito(item)"
+          />
+          <div
+            class="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-500 rounded-full peer peer-checked:bg-red-600 transition-colors"
+          ></div>
+          <div
+            class="absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full transition-transform peer-checked:translate-x-full"
+          ></div>
+        </label>
+      </div>
+
+
     </div>
   </div>
 
+
+  <!--
   <button
     *ngIf="user"
     (click)="toggleFavorito(item)"
@@ -18,4 +43,6 @@
   >
     {{ isFavorito ? 'Quitar de favoritos' : 'Añadir a favoritos' }}
   </button>
+  -->
+
 </div>
