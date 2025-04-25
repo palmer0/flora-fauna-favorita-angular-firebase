@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Item} from '../../models/item.model';
 import {ItemListService} from '../../services/item-list.service';
@@ -15,19 +15,13 @@ import {FormsModule} from '@angular/forms';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
   private itemService = inject(ItemListService);
   private router = inject(Router);
 
   items$!: Observable<Item[]>;
 
-  /*
-  constructor(
-    private itemService: ItemListService,
-    private router: Router
-  ) {}
-  */
 
   ngOnInit() {
     this.items$ = this.itemService.getMostChosenItems(5);

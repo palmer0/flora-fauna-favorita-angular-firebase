@@ -30,19 +30,6 @@ export class LoginComponent {
     });
   }
 
-  /*
-  constructor(
-    private fb: FormBuilder,
-    private authService: UserAuthService,
-    private router: Router
-  ) {
-
-    this.form = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
-    });
-  }
-  */
 
   async login() {
     const { email, password } = this.form.value;

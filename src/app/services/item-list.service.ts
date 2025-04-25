@@ -25,11 +25,6 @@ export class ItemListService {
   private firestore = inject(Firestore);
   private itemListRef = collection(this.firestore, 'items');
 
-  /*
-  private itemListRef = collection(this.firestore, 'items');
-
-  constructor(private firestore: Firestore) {}
-  */
 
   getAllItems(): Observable<Item[]> {
     return collectionData(this.itemListRef, { idField: 'id' }) as Observable<Item[]>;

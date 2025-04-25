@@ -33,15 +33,6 @@ export class ItemFormComponent implements OnInit {
   id: string | null = null;
   uploading = false;
 
-  /*
-  constructor(
-    private route: ActivatedRoute,
-    private itemListService: ItemListService,
-    private router: Router,
-    private uploadService: ImageUploadService,
-  ) {}
-  */
-
 
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');

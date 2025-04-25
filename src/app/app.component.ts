@@ -20,7 +20,6 @@ export class AppComponent {
 
   //user = this.userAuthService.currentUser$;
   currentRoute: string = '';
-  //menuOpen = true;
   user: any = null;
 
   constructor() {
@@ -34,11 +33,6 @@ export class AppComponent {
     });
   }
 
-  /*
-  toggleMenu() {
-    this.menuOpen = !this.menuOpen;
-  }
-  */
 
   logout() {
     this.userAuthService.logout();

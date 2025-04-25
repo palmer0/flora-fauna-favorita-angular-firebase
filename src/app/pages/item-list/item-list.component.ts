@@ -35,14 +35,6 @@ export class ItemListComponent implements OnDestroy {
   }
 
   /*
-  constructor(
-    private itemListService: ItemListService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {}
-  */
-
-  /*
   ngOnInit() {
     this.tipo = this.route.snapshot.paramMap.get('tipo') as 'animal' | 'planta';
     this.items$ = this.itemListService.getItemsByTipo(this.tipo);

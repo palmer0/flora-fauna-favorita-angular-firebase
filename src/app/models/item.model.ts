@@ -7,5 +7,4 @@ export interface Item {
   fechaCreacion?: number;
   vecesElegido?: number; // Para pantalla principal
 
-  // Puedes añadir más campos según necesites
 }

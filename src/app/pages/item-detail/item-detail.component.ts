@@ -33,16 +33,6 @@ export class ItemDetailComponent  implements OnInit {
   user: User | null = null;
 
   /*
-  constructor(
-    private route: ActivatedRoute,
-    private favoritosService: ItemFavoritesService,
-    private authService: UserAuthService,
-    private itemListService: ItemListService
-  ) {}
-  */
-
-
-  /*
   ngOnInit() {
     this.itemId = this.route.snapshot.paramMap.get('id')!;
     this.item$ = this.itemListService.getItemById(this.itemId);

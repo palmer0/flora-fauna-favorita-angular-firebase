@@ -21,12 +21,6 @@ export class ItemFavoritesComponent implements OnInit {
 
   favoritos$!: Observable<any[]>;
 
-  /*
-  constructor(
-    private favoritosService: ItemFavoritesService,
-    private router: Router
-  ) {}
-  */
 
   ngOnInit() {
     this.favoritos$ = this.favoritosService.getMisFavoritos();

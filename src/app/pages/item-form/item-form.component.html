@@ -40,13 +40,6 @@
     </div>
 
 
-    <!--
-    <div>
-      <label class="block text-sm font-medium text-gray-700">Imagen</label>
-      <input type="file" (change)="onFileSelected($event)" />
-    </div>
-    -->
-
     <div *ngIf="uploading" class="flex items-center space-x-2 text-sm text-gray-600">
       <span class="animate-spin h-5 w-5 border-2 border-blue-500 border-t-transparent rounded-full"></span>
       <span>Subiendo imagen...</span>
@@ -55,12 +48,6 @@
     <div *ngIf="item.imagenUrl">
       <img [src]="item.imagenUrl" class="max-w-full mt-2 rounded-md" />
     </div>
-
-    <!--
-    <button (click)="saveItem()" class="bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 mx-auto block">
-      Guardar
-    </button>
-    -->
 
 
     <button (click)="saveItem()" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700">

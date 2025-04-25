@@ -30,20 +30,6 @@ export class RegisterComponent {
     });
   }
 
-  /*
-  constructor(
-    private fb: FormBuilder,
-    private authService: UserAuthService,
-    private router: Router
-  ) {
-
-    this.form = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-    });
-  }
-  */
-
   async register() {
     const { email, password } = this.form.value;
 
