@@ -5,6 +5,7 @@ import {ItemListService} from '../../services/item-list.service';
 import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
+import {ItemFavoritesService} from '../../services/item-favorites.service';
 
 @Component({
   selector: 'app-item-list',
@@ -21,16 +22,25 @@ export class ItemListComponent implements OnDestroy {
   private itemListService = inject(ItemListService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
+  private favoritosService = inject(ItemFavoritesService);
 
   tipo: 'animal' | 'planta' = 'animal';
   items$!: Observable<Item[]>;
   private sub: Subscription;
+  favorites: { [itemId: string]: boolean } = {};
+
 
   constructor() {
     this.sub = this.route.paramMap.subscribe((params) => {
       // this.tipo = params.get('tipo')  || '';
       this.tipo = params.get('tipo') as 'animal' | 'planta';
       this.items$ = this.itemListService.getItemsByTipo(this.tipo);
+
+      this.items$.subscribe(items => {
+        items.forEach(item => {
+          this.checkIfFavorite(item.id!);
+        });
+      });
     });
   }
 
@@ -58,6 +68,13 @@ export class ItemListComponent implements OnDestroy {
     this.router.navigate(['/item-form', this.tipo]);
   }
   */
+
+
+
+  async checkIfFavorite(itemId: string) {
+    const isFav = await this.favoritosService.isFavorito(itemId);
+    this.favorites[itemId] = isFav;
+  }
 
 
   getTitulo(): string {

@@ -48,11 +48,19 @@ export class ItemFavoritesService {
     return deleteDoc(favoritoRef);
   }
 
-  isFavorito(itemId: string): Promise<boolean> {
+  async isFavorito(itemId: string): Promise<boolean> {
     const favoritoRef =
       doc(this.firestore, `users/${this.getUserId()}/favoritos/${itemId}`);
-    return getDoc(favoritoRef).then(snapshot => snapshot.exists());
+    const snapshot = await getDoc(favoritoRef);
+    return snapshot.exists();
   }
+
+
+  // isFavorito(itemId: string): Promise<boolean> {
+  //   const favoritoRef =
+  //     doc(this.firestore, `users/${this.getUserId()}/favoritos/${itemId}`);
+  //   return getDoc(favoritoRef).then(snapshot => snapshot.exists());
+  // }
 
   getMisFavoritos(): Observable<any[]> {
     const favoritosRef = this.getFavoritosCollectionRef();
