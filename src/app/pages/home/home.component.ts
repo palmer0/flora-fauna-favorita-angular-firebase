@@ -20,14 +20,26 @@ export class HomeComponent implements OnInit {
 
   private itemService = inject(ItemListService);
   private router = inject(Router);
+  private favoritosService = inject(ItemFavoritesService);
 
   items$!: Observable<Item[]>;
-
+  favorites: { [itemId: string]: boolean } = {};
 
   ngOnInit() {
     this.items$ = this.itemService.getMostChosenItems(5);
+
+    this.items$.subscribe(items => {
+      items.forEach(item => {
+        this.checkIfFavorite(item.id!);
+      });
+    });
   }
 
+
+  async checkIfFavorite(itemId: string) {
+    const isFav = await this.favoritosService.isFavorito(itemId);
+    this.favorites[itemId] = isFav;
+  }
 
 
   openDetail(id: string) {
