@@ -12,10 +12,13 @@
         alt="{{ item.nombre }}"
         class="w-16 h-16 object-cover rounded-md mr-4"
       />
+
       <div class="flex-1">
         <div class="font-semibold">{{ item.nombre }}</div>
         <div class="text-sm text-gray-500">{{ item.descripcion}}</div>
+
       </div>
+
       <div *ngIf="favorites[item.id!]"
            class="bg-orange-100 text-orange-800 text-sm px-2 py-1 rounded-full">
         Favorito

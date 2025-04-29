@@ -3,18 +3,31 @@
   <div class="grid gap-4">
     <div
       class="flex items-center bg-white rounded-lg shadow-md p-4 cursor-pointer hover:bg-gray-100"
-      *ngFor="let fav of favoritos$ | async"
-      (click)="openDetail(fav.id)"
+      *ngFor="let fav of favoritos$ | async "
+      (click)="openDetail(fav.id!)"
     >
       <img
         [src]="fav.imagenUrl"
         alt="{{ fav.nombre }}"
         class="w-16 h-16 object-cover rounded-md mr-4"
       />
+
+      <div class="flex-1">
+        <div class="font-semibold">{{ fav.nombre }}</div>
+        <div class="text-sm text-gray-500">{{ fav.tipo | titlecase }}</div>
+      </div>
+
+      <div class="bg-green-100 text-green-800 text-sm px-2 py-1 rounded-full">
+        {{ getVecesElegido(fav.id!) }} votos
+      </div>
+
+      <!--
       <div>
         <div class="font-semibold">{{ fav.nombre }}</div>
         <div class="text-sm text-gray-500">{{ fav.tipo | titlecase }}</div>
       </div>
+
+      -->
     </div>
   </div>
 </div>

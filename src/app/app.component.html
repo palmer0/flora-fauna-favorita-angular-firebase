@@ -1,86 +1,87 @@
-<header class="bg-blue-600 text-white px-4 py-3 flex flex-wrap items-center justify-between">
-  <!-- Título -->
-  <h1 class="text-xl font-bold mr-6">Flora & Fauna</h1>
+<ng-container *ngIf="user !== undefined">
+  <header class="bg-blue-600 text-white px-4 py-3 flex flex-wrap items-center justify-between">
+    <!-- Título -->
+    <h1 class="text-xl font-bold mr-6">Flora & Fauna</h1>
 
-  <!-- Opciones de navegación -->
-  <nav class="flex flex-wrap gap-4 items-center text-sm">
-    <a
-      *ngIf="!user && currentRoute !== '/login'"
-      routerLink="/login"
-      class="hover:underline"
-    >
-      Login
-    </a>
-
-    <a
-      *ngIf="!user && currentRoute !== '/register'"
-      routerLink="/register"
-      class="hover:underline"
-    >
-      Register
-    </a>
-
-    <ng-container *ngIf="user">
+    <!-- Opciones de navegación -->
+    <nav class="flex flex-wrap gap-4 items-center text-sm">
       <a
-        *ngIf="currentRoute !== '/home'"
-        routerLink="/home"
+        *ngIf="!user && currentRoute !== '/login'"
+        routerLink="/login"
         class="hover:underline"
       >
-        Home
+        Login
       </a>
 
       <a
-        *ngIf="currentRoute.includes('/item-list/animal')"
-        routerLink="/item-form/animal"
+        *ngIf="!user && currentRoute !== '/register'"
+        routerLink="/register"
         class="hover:underline"
       >
-        Nuevo Animal
+        Register
       </a>
 
-      <a
-        *ngIf="currentRoute.includes('/item-list/planta')"
-        routerLink="/item-form/planta"
-        class="hover:underline"
-      >
-        Nueva Planta
-      </a>
+      <ng-container *ngIf="user">
+        <a
+          *ngIf="currentRoute !== '/home'"
+          routerLink="/home"
+          class="hover:underline"
+        >
+          Home
+        </a>
 
-      <a
-        *ngIf="!currentRoute.includes('/item-list/animal')"
-        routerLink="/item-list/animal"
-        class="hover:underline"
-      >
-        Animales
-      </a>
+        <a
+          *ngIf="currentRoute.includes('/item-list/animal')"
+          routerLink="/item-form/animal"
+          class="hover:underline"
+        >
+          Nuevo Animal
+        </a>
 
-      <a
-        *ngIf="!currentRoute.includes('/item-list/planta')"
-        routerLink="/item-list/planta"
-        class="hover:underline"
-      >
-        Plantas
-      </a>
+        <a
+          *ngIf="currentRoute.includes('/item-list/planta')"
+          routerLink="/item-form/planta"
+          class="hover:underline"
+        >
+          Nueva Planta
+        </a>
 
-      <a
-        *ngIf="currentRoute !== '/favorites'"
-        routerLink="/favorites"
-        class="hover:underline"
-      >
-        Favoritos
-      </a>
+        <a
+          *ngIf="!currentRoute.includes('/item-list/animal')"
+          routerLink="/item-list/animal"
+          class="hover:underline"
+        >
+          Animales
+        </a>
 
-      <button
-        (click)="logout()"
-        class="hover:underline text-red-200"
-      >
-        Logout
-      </button>
-    </ng-container>
-  </nav>
-</header>
+        <a
+          *ngIf="!currentRoute.includes('/item-list/planta')"
+          routerLink="/item-list/planta"
+          class="hover:underline"
+        >
+          Plantas
+        </a>
 
-<!-- Contenido principal -->
-<main class="p-4 bg-gray-50 min-h-screen">
-  <router-outlet></router-outlet>
-</main>
+        <a
+          *ngIf="currentRoute !== '/favorites'"
+          routerLink="/favorites"
+          class="hover:underline"
+        >
+          Favoritos
+        </a>
 
+        <button
+          (click)="logout()"
+          class="hover:underline text-red-200"
+        >
+          Logout
+        </button>
+      </ng-container>
+    </nav>
+  </header>
+
+  <!-- Contenido principal -->
+  <main class="p-4 bg-gray-50 min-h-screen">
+    <router-outlet></router-outlet>
+  </main>
+</ng-container>

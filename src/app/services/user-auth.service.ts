@@ -14,7 +14,9 @@ import {
 })
 export class UserAuthService {
 
-  private userSubject = new BehaviorSubject<User | null>(null);
+  // private userSubject = new BehaviorSubject<User | null>(null);
+  private userSubject =
+    new BehaviorSubject<User | null | undefined>(undefined);
   currentUser$ = this.userSubject.asObservable();
 
 

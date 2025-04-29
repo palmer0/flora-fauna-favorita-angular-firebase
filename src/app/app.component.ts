@@ -2,6 +2,7 @@ import {Component, inject} from '@angular/core';
 import {Router, RouterModule, RouterOutlet} from '@angular/router';
 import {UserAuthService} from './services/user-auth.service';
 import {CommonModule} from '@angular/common';
+import {User} from '@angular/fire/auth';
 
 @Component({
   selector: 'app-root',
@@ -20,10 +21,11 @@ export class AppComponent {
 
   //user = this.userAuthService.currentUser$;
   currentRoute: string = '';
-  user: any = null;
+  //user: any = null;
+  user: User | null | undefined = undefined;
 
   constructor() {
-    this.userAuthService.currentUser$.subscribe((user) => {
+    this.userAuthService.currentUser$.subscribe(user => {
       this.user = user;
     });
 

@@ -30,7 +30,8 @@ export class ItemDetailComponent  implements OnInit {
   item$!: Observable<Item>;
   //itemId!: string;
   isFavorito = false;
-  user: User | null = null;
+  //user: User | null = null;
+  user: User | null | undefined = undefined;
 
   /*
   ngOnInit() {
